@@ -1,9 +1,19 @@
 import './App.css';
+import Feed from './Feed';
+import Header from './Header';
+import Sidebar from './Sidebar';
 
 function App() {
   return (
-    <div className="App">
-      <h1> FACEBOOK </h1>
+    <div className="app">
+      <Header />
+
+      <div class="app_body">
+        <Sidebar />
+        <Feed />
+          {/* Feed */}
+          {/* Widjets */}
+      </div>
     </div>
   );
 }
