@@ -5,7 +5,10 @@ import './StoryReel.css'
 function StoryReel() {
     return (
         <div className="storyReel">
-            <Story />
+            <Story title="hi" />
+            <Story title="hi" />
+            <Story title="hi" />
+            <Story title="hi" />
         </div>
     )
 }

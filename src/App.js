@@ -8,10 +8,9 @@ function App() {
     <div className="app">
       <Header />
 
-      <div class="app_body">
+      <div class="app__body">
         <Sidebar />
         <Feed />
-          {/* Feed */}
           {/* Widjets */}
       </div>
     </div>
