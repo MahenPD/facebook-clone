@@ -28,21 +28,21 @@ function Header() {
         </div>
       </div>
       <div className="header__center">
-        <div class="header__option--active">
+        <div className="header__option--active">
           <HomeIcon fontSize="large" />
         </div>
-        <div class="header__option">
+        <div className="header__option">
           <SubscriptionsIcon fontSize="large" />
         </div>
-        <div class="header__option">
+        <div className="header__option">
           <StorefrontIcon fontSize="large" />
         </div>
-        <div class="header__option">
+        <div className="header__option">
           <SupervisedUserCircleIcon fontSize="large" />
         </div>
       </div>
       <div className="header__right">
-        <div class="header__info">
+        <div className="header__info">
           <Avatar src={user.photoURL} />
           <h4>{user.displayName}</h4>
         </div>
