@@ -9,10 +9,6 @@ import Widgets from "./components/Widgets/Widgets";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
-  useEffect(() => {
-    console.log(user);
-    debugger
-  }, [user])
 
   return (
     <div className="app">
