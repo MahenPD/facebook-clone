@@ -17,9 +17,9 @@ function Post(props) {
         <Avatar className="post__avatar" src={profilePic} />
         <div className="post__topInfo">
           <h3>{username}</h3>
-          {/* <p>
-            {new Date(timestamp.toDate()).toUTCString}
-        </p> */}
+          <p>
+            {new Date(timestamp.toDate()).toUTCString()}
+        </p>
         </div>
       </div>
 
