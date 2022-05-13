@@ -29,6 +29,7 @@ function Feed() {
       {posts.map((post) => (
         <Post
           key={post.id}
+          postId={post.id}
           profilePic={post.data.profilePic}
           message={post.data.message}
           timestamp={post.data.timestamp}
@@ -36,17 +37,6 @@ function Feed() {
           image={post.data.image}
         />
       ))}
-
-      {/* <Post
-        profilePic={
-          "https://cutewallpaper.org/21/anime-profile-pictures-boy/cartoon-and-anime-profile-pics-toon.pfps-Instagram-Profile-.jpg"
-        }
-        message="Wow this works"
-        timeStamp={"2002"}
-        username={"MahenDunsinghe"}
-        image={"https://wallpapercave.com/wp/wp6575735.jpg"}
-      />
-      /> */}
     </div>
   );
 }

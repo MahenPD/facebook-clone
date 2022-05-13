@@ -7,25 +7,50 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { useStateValue } from "../StateProvider";
 import db from "../../firebase";
 import firebase from "firebase";
+import isHateSpeechPresent from "../../services";
 
-function MessageSender() {
+function MessageSender({ hideActionBtns, isComment, commentId, prevComments }) {
   const [{ user }, dispatch] = useStateValue();
   const [input, setInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    db.collection("posts").add({
-      message: input,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      profilePic: user.photoURL,
-      username: user.displayName,
-      image: imageUrl,
-    });
+    // const isHateSpeech = await isHateSpeechPresent(input);
 
-    setImageUrl("");
-    setInput("");
+    // if(isHateSpeech) {
+    //   POP UP
+    // }
+
+    if (isComment) {
+      const newComments = [
+        ...prevComments,
+        {
+          message: input,
+          profilePic: user.photoURL,
+          username: user.displayName,
+          image: imageUrl,
+        },
+      ];
+      db.collection("posts").doc(commentId).update({
+        comments: newComments,
+      });
+
+      setImageUrl("");
+      setInput("");
+    } else {
+      db.collection("posts").add({
+        message: input,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        profilePic: user.photoURL,
+        username: user.displayName,
+        image: imageUrl,
+      });
+
+      setImageUrl("");
+      setInput("");
+    }
   };
 
   return (
@@ -53,20 +78,22 @@ function MessageSender() {
         </form>
       </div>
 
-      <div className="messageSender__bottom">
-        <div className="messageSender__option">
-          <VideocamIcon style={{ color: "red" }} />
-          <h3>Live Video</h3>
+      {!hideActionBtns && (
+        <div className="messageSender__bottom">
+          <div className="messageSender__option">
+            <VideocamIcon style={{ color: "red" }} />
+            <h3>Live Video</h3>
+          </div>
+          <div className="messageSender__option">
+            <PhotoLibraryIcon style={{ color: "green" }} />
+            <h3>Photo/Video</h3>
+          </div>
+          <div className="messageSender__option">
+            <InsertEmoticonIcon style={{ color: "yellow" }} />
+            <h3>Feeling/Activity</h3>
+          </div>
         </div>
-        <div className="messageSender__option">
-          <PhotoLibraryIcon style={{ color: "green" }} />
-          <h3>Photo/Video</h3>
-        </div>
-        <div className="messageSender__option">
-          <InsertEmoticonIcon style={{ color: "yellow" }} />
-          <h3>Feeling/Activity</h3>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

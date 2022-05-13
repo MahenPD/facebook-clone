@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./App.css";
 import Feed from "./components/Feed/Feed";
 import Header from "./components/Header/Header";
@@ -8,7 +7,7 @@ import { useStateValue } from "./components/StateProvider";
 import Widgets from "./components/Widgets/Widgets";
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
 
   return (
     <div className="app">
