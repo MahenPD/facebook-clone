@@ -7,7 +7,7 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { useStateValue } from "../StateProvider";
 import db from "../../firebase";
 import firebase from "firebase";
-import isHateSpeechPresent from "../../services";
+import { isHateSpeechPresent } from "../../services";
 
 function MessageSender({ hideActionBtns, isComment, commentId, prevComments }) {
   const [{ user }, dispatch] = useStateValue();
@@ -17,11 +17,14 @@ function MessageSender({ hideActionBtns, isComment, commentId, prevComments }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const isHateSpeech = await isHateSpeechPresent(input);
+    const isHateSpeech = await isHateSpeechPresent(input);
+    debugger;
 
-    // if(isHateSpeech) {
-    //   POP UP
-    // }
+    if (isHateSpeech) {
+      alert(
+        "Your message contains hate. Please refrain from spreading hate and change your way of vocabulary."
+      );
+    }
 
     if (isComment) {
       const newComments = [

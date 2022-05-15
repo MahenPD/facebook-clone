@@ -20,9 +20,8 @@ function Post(props) {
     if (postId) {
       db.collection("posts")
         .doc(postId)
-        .get()
-        .then((res) => {
-          const comments = res.data().comments;
+        .onSnapshot((snapshot) => {
+          const comments = snapshot.data().comments;
           setPostComments(comments || []);
         });
     }
@@ -71,11 +70,14 @@ function Post(props) {
             <ExpandMoreOutlinedIcon />
           </div>
         </div>
+      </div>
+      <div className="post">
         {openCommentSection && (
           <CommentSection
             mainComment={message}
             commentId={postId}
             comments={postComments}
+            profilePic={profilePic}
           />
         )}
       </div>

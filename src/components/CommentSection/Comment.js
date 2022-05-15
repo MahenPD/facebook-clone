@@ -3,20 +3,24 @@ import React from "react";
 import "./Comment.css";
 import MessageSender from "../MessageSender/MessageSender";
 
-function CommentSection({ mainComment, comments = [], commentId }) {
+function CommentSection({ mainComment, comments = [], commentId, profilePic }) {
   return (
     <div>
       <div className="comment__container">
         <div className="message__header">
-          <Avatar />
+          <Avatar src={profilePic} />
           <span style={{ marginLeft: 10 }}>{mainComment}</span>
         </div>
         <hr style={{ margin: 15 }} />
         <div className="comments">
           {comments.length > 0 ? (
             comments.map((comment) => (
-              <div className="message__header" style={{ marginLeft: 40 }}>
-                <Avatar />
+              <div
+                className="message__header_comment"
+                style={{ marginLeft: 40, marginTop: 20 }}
+              >
+                <Avatar src={comment.profilePic} />
+                <span style={{ marginLeft: 10 }}>{comment.username} - </span>
                 <span style={{ marginLeft: 10 }}>{comment.message}</span>
               </div>
             ))
