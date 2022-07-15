@@ -8,22 +8,22 @@ import { useStateValue } from "../StateProvider";
 import db from "../../firebase";
 import firebase from "firebase";
 import { isHateSpeechPresent } from "../../services";
+import MessageContainsHateModal from "../MessageContainsHateModal";
 
 function MessageSender({ hideActionBtns, isComment, commentId, prevComments }) {
   const [{ user }, dispatch] = useStateValue();
   const [input, setInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const isHateSpeech = await isHateSpeechPresent(input);
-    debugger;
+    const { data } = await isHateSpeechPresent({ message: input });
 
-    if (isHateSpeech) {
-      alert(
-        "Your message contains hate. Please refrain from spreading hate and change your way of vocabulary."
-      );
+    if (data.data) {
+      setShowAlert(true);
+      return;
     }
 
     if (isComment) {
@@ -96,6 +96,12 @@ function MessageSender({ hideActionBtns, isComment, commentId, prevComments }) {
             <h3>Feeling/Activity</h3>
           </div>
         </div>
+      )}
+      {showAlert && (
+        <MessageContainsHateModal
+          open={showAlert}
+          handleClose={() => setShowAlert(false)}
+        />
       )}
     </div>
   );
