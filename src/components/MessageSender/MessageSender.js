@@ -20,8 +20,9 @@ function MessageSender({ hideActionBtns, isComment, commentId, prevComments }) {
     e.preventDefault();
 
     const { data } = await isHateSpeechPresent({ message: input });
+    console.log(data.isHateSpeech);
 
-    if (data.data) {
+    if (data.isHateSpeech) {
       setShowAlert(true);
       return;
     }
